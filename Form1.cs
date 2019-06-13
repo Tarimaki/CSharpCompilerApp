@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -41,6 +42,7 @@ namespace CSharpCompilerApp
             }
         }
 
+        //コンパイル開始
         private void CompileStart_Click(object sender, EventArgs e)
         {
             Process process = new Process();
@@ -49,12 +51,25 @@ namespace CSharpCompilerApp
             process.StartInfo.RedirectStandardOutput = true;
 
             String command = SorceFileName;
-
             process.StartInfo.Arguments = command;
-
             process.Start();
 
-            MessageBox.Show(process.StandardOutput.ReadToEnd());
+            Form2 form = new Form2(this);
+            form.Show();
+
+            while (true)
+            {
+                if (process.HasExited)
+                {
+                    form.End_Compile();
+
+                    if(MessageBox.Show(process.StandardOutput.ReadToEnd(),"終了") == DialogResult.OK)
+                    {
+                        form.Focus();
+                    }
+                    break;
+                }
+            }
         }
     }
 }

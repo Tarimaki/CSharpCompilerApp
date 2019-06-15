@@ -57,16 +57,12 @@ namespace CSharpCompilerApp
             Form2 form = new Form2(this);
             form.Show();
 
+
             while (true)
             {
                 if (process.HasExited)
                 {
-                    form.End_Compile();
-
-                    if(MessageBox.Show(process.StandardOutput.ReadToEnd(),"終了") == DialogResult.OK)
-                    {
-                        form.Focus();
-                    }
+                    form.End_Compile(process.StandardOutput.ReadToEnd());
                     break;
                 }
             }

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -60,7 +61,14 @@ namespace CSharpCompilerApp
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.RedirectStandardOutput = true;
 
-            String command = SorceFileName;
+            //ファイルのパスからファイル名を取得
+            string fileName = Path.GetFileName(SorceFileName);
+            int namelength = fileName.Length;
+
+            //ソースファイルの拡張子 (.cs)をファイル名から取り除き、出力するフォルダーを設定
+            fileName = fileName.Remove(namelength - 3);
+
+            String command = "/target:winexe " + "/out:" + OutFileName + fileName + ".exe" + " " + SorceFileName;
             process.StartInfo.Arguments = command;
             process.Start();
 
@@ -78,13 +86,14 @@ namespace CSharpCompilerApp
             }
         }
 
+        /***************MENU STRIP*********************/
         //ファイル->ファイルを開く
         private void OpenFileMenu_Click(object sender, EventArgs e)
         {
             CompileFileDialog();
         }
 
-        //menustrip　その他->バージョン情報
+        //その他->バージョン情報
         private void OpenVersionInformation_Click(object sender, EventArgs e)
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
@@ -99,5 +108,6 @@ namespace CSharpCompilerApp
 
             MessageBox.Show(msg,"バージョン情報");
         }
+        /*******************END************************/
     }
 }

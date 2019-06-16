@@ -31,6 +31,11 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.OpenOther = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenVersionInformation = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox1
@@ -61,6 +66,39 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.CompileStart_Click);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.OpenFile,
+            this.OpenOther});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(366, 28);
+            this.menuStrip1.TabIndex = 3;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // OpenOther
+            // 
+            this.OpenOther.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.OpenVersionInformation});
+            this.OpenOther.Name = "OpenOther";
+            this.OpenOther.Size = new System.Drawing.Size(59, 24);
+            this.OpenOther.Text = "その他";
+            // 
+            // OpenVersionInformation
+            // 
+            this.OpenVersionInformation.Name = "OpenVersionInformation";
+            this.OpenVersionInformation.Size = new System.Drawing.Size(216, 26);
+            this.OpenVersionInformation.Text = "バージョン情報";
+            this.OpenVersionInformation.Click += new System.EventHandler(this.OpenVersionInformation_Click);
+            // 
+            // OpenFile
+            // 
+            this.OpenFile.Name = "OpenFile";
+            this.OpenFile.Size = new System.Drawing.Size(63, 24);
+            this.OpenFile.Text = "ファイル";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -69,8 +107,12 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -81,6 +123,10 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem OpenFile;
+        private System.Windows.Forms.ToolStripMenuItem OpenOther;
+        private System.Windows.Forms.ToolStripMenuItem OpenVersionInformation;
     }
 }
 

@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,8 +15,9 @@ namespace CSharpCompilerApp
 {
     public partial class Form1 : Form
     {
-        private String SorceFileName;      //コンパイルするファイル名
-        private String CompilerFileName;   //コンパイラー名
+        private string SorceFileName;      //コンパイルするファイル名
+        private string CompilerFileName;   //コンパイラー名
+        private string OutFileName;        //コンパイルしたファイルを保存するディレクトリ名
 
         public Form1()
         {
@@ -23,6 +25,8 @@ namespace CSharpCompilerApp
 
             this.Text = "C#コンパイラ";
             CompilerFileName = "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\csc.exe";
+            OutFileName      = "out_program\\";
+            
         }
 
 
@@ -66,6 +70,22 @@ namespace CSharpCompilerApp
                     break;
                 }
             }
+        }
+
+        //menustrip　その他->バージョン情報
+        private void OpenVersionInformation_Click(object sender, EventArgs e)
+        {
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            AssemblyName assemblyName = assembly.GetName();
+            AssemblyCopyrightAttribute copyrightAttribute = 
+                (AssemblyCopyrightAttribute)assembly.GetCustomAttribute(typeof(AssemblyCopyrightAttribute));
+
+            string copyright = copyrightAttribute.Copyright;
+
+            string msg = "Version:" + assemblyName.Version.ToString() + 
+                         "\n" +copyright;
+
+            MessageBox.Show(msg,"バージョン情報");
         }
     }
 }

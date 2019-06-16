@@ -51,10 +51,14 @@ namespace CSharpCompilerApp
         //コンパイル完了メッセージのokボタン
         private void button1_Click(object sender, EventArgs e)
         {
+            this.Close();
+        }
+
+        private void Form2_FormClosed(object sender, FormClosedEventArgs e)
+        {
             //元のフォームのアクセスを許可してフォーカスする
             MainForm.Focus();
             MainForm.Enabled = true;
-            this.Close();
         }
     }
 }

@@ -24,14 +24,13 @@ namespace CSharpCompilerApp
             InitializeComponent();
 
             this.Text = "C#コンパイラ";
+            this.Icon = new Icon("Iconc#.ico");
             CompilerFileName = "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\csc.exe";
             OutFileName      = "out_program\\";
             
         }
 
-
-        //コンパイルするファイルを選択する
-        private void fileOpen_Click(object sender, EventArgs e)
+        private void CompileFileDialog()
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "C#ソースファイル(*.cs)|*.cs|すべてのファイル(*.*)|*.*";
@@ -44,6 +43,13 @@ namespace CSharpCompilerApp
                 SorceFileName = ofd.FileName;
                 textBox1.Text = SorceFileName;
             }
+        }
+
+
+        //コンパイルするファイルを選択する
+        private void fileOpen_Click(object sender, EventArgs e)
+        {
+            CompileFileDialog();
         }
 
         //コンパイル開始
@@ -70,6 +76,12 @@ namespace CSharpCompilerApp
                     break;
                 }
             }
+        }
+
+        //ファイル->ファイルを開く
+        private void OpenFileMenu_Click(object sender, EventArgs e)
+        {
+            CompileFileDialog();
         }
 
         //menustrip　その他->バージョン情報

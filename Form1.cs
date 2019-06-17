@@ -20,6 +20,8 @@ namespace CSharpCompilerApp
         private string CompilerFileName;   //コンパイラー名
         private string OutDirectoryName;   //コンパイルしたファイルを保存するディレクトリ名
 
+        private const string NOT_SETTING_MESSAGE = "ファイルを選択してください。"; //ファイルが選択されなかった時のエラーメッセージ
+
         public Form1()
         {
             InitializeComponent();
@@ -27,11 +29,11 @@ namespace CSharpCompilerApp
             this.Text = "C#コンパイラ";
             this.Icon = new Icon("Iconc#.ico");
             CompilerFileName = "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\csc.exe";
-            OutDirectoryName      = "out_program\\";
+            OutDirectoryName = "out_program\\";
             
         }
 
-        internal string CompileFileDialog()
+        internal static string CompileFileDialog()
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "C#ソースファイル(*.cs)|*.cs|すべてのファイル(*.*)|*.*";
@@ -45,7 +47,7 @@ namespace CSharpCompilerApp
             }
             else
             {
-                return "ファイルを選択してください。";
+                return NOT_SETTING_MESSAGE;
             }
         }
 
@@ -53,14 +55,28 @@ namespace CSharpCompilerApp
         //コンパイルするファイルを選択する
         private void fileOpen_Click(object sender, EventArgs e)
         {
-            string fn = CompileFileDialog();
-            SorceFileName = fn;
-            textBox1.Text = fn;
+            string str;
+            if((str = CompileFileDialog()) == NOT_SETTING_MESSAGE)
+            {
+                SorceFileName = null;
+                textBox1.Text = NOT_SETTING_MESSAGE;
+            }
+            else
+            {
+                SorceFileName = str;
+                textBox1.Text = str;
+            }
         }
 
         //コンパイル開始
         private void CompileStart_Click(object sender, EventArgs e)
         {
+            if(SorceFileName == null)
+            {
+                MessageBox.Show("ソースファイルが選択されてません。もしくは無効です。");
+                return;
+            }
+
             Process process = new Process();
             process.StartInfo.FileName = CompilerFileName;
             process.StartInfo.UseShellExecute = false;

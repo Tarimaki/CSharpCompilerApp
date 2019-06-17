@@ -16,11 +16,13 @@ namespace CSharpCompilerApp
 {
     public partial class Form1 : Form
     {
-        private string SorceFileName;      //コンパイルするファイル名
-        private string CompilerFileName;   //コンパイラー名
         private string OutDirectoryName;   //コンパイルしたファイルを保存するディレクトリ名
 
-        private const string NOT_SETTING_MESSAGE = "ファイルを選択してください。"; //ファイルが選択されなかった時のエラーメッセージ
+        /*自動プロパティ*/
+        public static string CompilerFile { set; get; }//コンパイラーのパス
+        public static string SorceFile { set; get; }   //コンパイルするファイルのパス
+
+        internal const string NOT_SETTING_MESSAGE = "ファイルを選択してください。"; //ファイルが選択されなかった時のエラーメッセージ
 
         public Form1()
         {
@@ -28,18 +30,19 @@ namespace CSharpCompilerApp
 
             this.Text = "C#コンパイラ";
             this.Icon = new Icon("Iconc#.ico");
-            CompilerFileName = "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\csc.exe";
+
+            CompilerFile = "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\csc.exe";
             OutDirectoryName = "out_program\\";
             
         }
 
-        internal static string CompileFileDialog()
+        internal static string CompileFileDialog(string filter , string title)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "C#ソースファイル(*.cs)|*.cs|すべてのファイル(*.*)|*.*";
+            ofd.Filter = filter;
             ofd.RestoreDirectory = true;
             ofd.FilterIndex = 1;
-            ofd.Title = "csファイルを選択してください";
+            ofd.Title = title;
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
@@ -55,15 +58,17 @@ namespace CSharpCompilerApp
         //コンパイルするファイルを選択する
         private void fileOpen_Click(object sender, EventArgs e)
         {
-            string str;
-            if((str = CompileFileDialog()) == NOT_SETTING_MESSAGE)
+            string str = CompileFileDialog(
+                "C#ソースファイル(*.cs)|*.cs|すべてのファイル(*.*)|*.*", "csファイルを選択してください");
+
+            if(str == NOT_SETTING_MESSAGE)
             {
-                SorceFileName = null;
+                SorceFile = null;
                 textBox1.Text = NOT_SETTING_MESSAGE;
             }
             else
             {
-                SorceFileName = str;
+                SorceFile = str;
                 textBox1.Text = str;
             }
         }
@@ -71,25 +76,25 @@ namespace CSharpCompilerApp
         //コンパイル開始
         private void CompileStart_Click(object sender, EventArgs e)
         {
-            if(SorceFileName == null)
+            if(SorceFile == null)
             {
-                MessageBox.Show("ソースファイルが選択されてません。もしくは無効です。");
+                MessageBox.Show("ソースファイルが選択されてません。もしくは無効です。" , "警告" , MessageBoxButtons.OK , MessageBoxIcon.Error);
                 return;
             }
 
             Process process = new Process();
-            process.StartInfo.FileName = CompilerFileName;
+            process.StartInfo.FileName = CompilerFile;
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.RedirectStandardOutput = true;
 
             //ファイルのパスからファイル名を取得
-            string fileName = Path.GetFileName(SorceFileName);
+            string fileName = Path.GetFileName(SorceFile);
             int namelength = fileName.Length;
 
             //ソースファイルの拡張子 (.cs)をファイル名から取り除く
             fileName = fileName.Remove(namelength - 3) + ".exe";
 
-            string command = "/target:winexe " + "/out:" + OutDirectoryName + fileName + " " + SorceFileName;
+            string command = "/target:winexe " + "/out:" + OutDirectoryName + fileName + " " + SorceFile;
             process.StartInfo.Arguments = command;
             process.Start();
 
@@ -111,13 +116,25 @@ namespace CSharpCompilerApp
         //ファイル->ファイルを開く
         private void OpenFileMenu_Click(object sender, EventArgs e)
         {
-            CompileFileDialog();
+            string str = CompileFileDialog(
+                "C#ソースファイル(*.cs)|*.cs|すべてのファイル(*.*)|*.*", "csファイルを選択してください");
+
+            if (str == NOT_SETTING_MESSAGE)
+            {
+                SorceFile = null;
+                textBox1.Text = NOT_SETTING_MESSAGE;
+            }
+            else
+            {
+                SorceFile = str;
+                textBox1.Text = str;
+            }
         }
 
         //ファイル->設定
         private void OpenSetMenu_Click(object sender, EventArgs e)
         {
-            Form setting_form = new SettingForm();
+            Form setting_form = new SettingForm(this);
             setting_form.ShowDialog();
         }
 

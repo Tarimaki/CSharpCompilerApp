@@ -191,6 +191,18 @@
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="menuStripOpen.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 24</value>
+  </data>
+  <data name="menuStripOpen.Text" xml:space="preserve">
+    <value>ファイル</value>
+  </data>
+  <data name="OpenOther.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 24</value>
+  </data>
+  <data name="OpenOther.Text" xml:space="preserve">
+    <value>その他</value>
+  </data>
   <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -215,26 +227,20 @@
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="menuStripOpen.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 24</value>
-  </data>
-  <data name="menuStripOpen.Text" xml:space="preserve">
-    <value>ファイル</value>
-  </data>
   <data name="OpenFileMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 26</value>
+    <value>216, 26</value>
   </data>
   <data name="OpenFileMenu.Text" xml:space="preserve">
     <value>ファイルを開く</value>
   </data>
-  <data name="OpenOther.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 24</value>
+  <data name="OpenSetMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 26</value>
   </data>
-  <data name="OpenOther.Text" xml:space="preserve">
-    <value>その他</value>
+  <data name="OpenSetMenu.Text" xml:space="preserve">
+    <value>設定</value>
   </data>
   <data name="OpenVersionInformation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 26</value>
+    <value>216, 26</value>
   </data>
   <data name="OpenVersionInformation.Text" xml:space="preserve">
     <value>バージョン情報</value>
@@ -1075,6 +1081,12 @@
     <value>OpenFileMenu</value>
   </data>
   <data name="&gt;&gt;OpenFileMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;OpenSetMenu.Name" xml:space="preserve">
+    <value>OpenSetMenu</value>
+  </data>
+  <data name="&gt;&gt;OpenSetMenu.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;OpenOther.Name" xml:space="preserve">

@@ -18,7 +18,7 @@ namespace CSharpCompilerApp
     {
         private string SorceFileName;      //コンパイルするファイル名
         private string CompilerFileName;   //コンパイラー名
-        private string OutFileName;        //コンパイルしたファイルを保存するディレクトリ名
+        private string OutDirectoryName;   //コンパイルしたファイルを保存するディレクトリ名
 
         public Form1()
         {
@@ -27,7 +27,7 @@ namespace CSharpCompilerApp
             this.Text = "C#コンパイラ";
             this.Icon = new Icon("Iconc#.ico");
             CompilerFileName = "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\csc.exe";
-            OutFileName      = "out_program\\";
+            OutDirectoryName      = "out_program\\";
             
         }
 
@@ -65,10 +65,10 @@ namespace CSharpCompilerApp
             string fileName = Path.GetFileName(SorceFileName);
             int namelength = fileName.Length;
 
-            //ソースファイルの拡張子 (.cs)をファイル名から取り除き、出力するフォルダーを設定
-            fileName = fileName.Remove(namelength - 3);
+            //ソースファイルの拡張子 (.cs)をファイル名から取り除く
+            fileName = fileName.Remove(namelength - 3) + ".exe";
 
-            String command = "/target:winexe " + "/out:" + OutFileName + fileName + ".exe" + " " + SorceFileName;
+            string command = "/target:winexe " + "/out:" + OutDirectoryName + fileName + " " + SorceFileName;
             process.StartInfo.Arguments = command;
             process.Start();
 
@@ -91,6 +91,12 @@ namespace CSharpCompilerApp
         private void OpenFileMenu_Click(object sender, EventArgs e)
         {
             CompileFileDialog();
+        }
+
+        //ファイル->設定
+        private void OpenSetMenu_Click(object sender, EventArgs e)
+        {
+            
         }
 
         //その他->バージョン情報

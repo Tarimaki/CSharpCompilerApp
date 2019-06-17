@@ -35,6 +35,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuStripOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenFileMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenSetMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenOther = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenVersionInformation = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
@@ -72,7 +73,8 @@
             // menuStripOpen
             // 
             this.menuStripOpen.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.OpenFileMenu});
+            this.OpenFileMenu,
+            this.OpenSetMenu});
             this.menuStripOpen.Name = "menuStripOpen";
             resources.ApplyResources(this.menuStripOpen, "menuStripOpen");
             // 
@@ -81,6 +83,12 @@
             this.OpenFileMenu.Name = "OpenFileMenu";
             resources.ApplyResources(this.OpenFileMenu, "OpenFileMenu");
             this.OpenFileMenu.Click += new System.EventHandler(this.OpenFileMenu_Click);
+            // 
+            // OpenSetMenu
+            // 
+            this.OpenSetMenu.Name = "OpenSetMenu";
+            resources.ApplyResources(this.OpenSetMenu, "OpenSetMenu");
+            this.OpenSetMenu.Click += new System.EventHandler(this.OpenSetMenu_Click);
             // 
             // OpenOther
             // 
@@ -103,7 +111,9 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -122,6 +132,7 @@
         private System.Windows.Forms.ToolStripMenuItem OpenOther;
         private System.Windows.Forms.ToolStripMenuItem OpenVersionInformation;
         private System.Windows.Forms.ToolStripMenuItem OpenFileMenu;
+        private System.Windows.Forms.ToolStripMenuItem OpenSetMenu;
     }
 }
 

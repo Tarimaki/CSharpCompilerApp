@@ -31,7 +31,7 @@ namespace CSharpCompilerApp
             
         }
 
-        private void CompileFileDialog()
+        internal string CompileFileDialog()
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "C#ソースファイル(*.cs)|*.cs|すべてのファイル(*.*)|*.*";
@@ -41,8 +41,11 @@ namespace CSharpCompilerApp
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                SorceFileName = ofd.FileName;
-                textBox1.Text = SorceFileName;
+                return ofd.FileName;
+            }
+            else
+            {
+                return "ファイルを選択してください。";
             }
         }
 
@@ -50,7 +53,9 @@ namespace CSharpCompilerApp
         //コンパイルするファイルを選択する
         private void fileOpen_Click(object sender, EventArgs e)
         {
-            CompileFileDialog();
+            string fn = CompileFileDialog();
+            SorceFileName = fn;
+            textBox1.Text = fn;
         }
 
         //コンパイル開始
@@ -96,7 +101,8 @@ namespace CSharpCompilerApp
         //ファイル->設定
         private void OpenSetMenu_Click(object sender, EventArgs e)
         {
-            
+            Form setting_form = new SettingForm();
+            setting_form.ShowDialog();
         }
 
         //その他->バージョン情報

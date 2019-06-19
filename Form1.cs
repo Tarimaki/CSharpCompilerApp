@@ -76,9 +76,15 @@ namespace CSharpCompilerApp
         //コンパイル開始
         private void CompileStart_Click(object sender, EventArgs e)
         {
-            if(SorceFile == null)
+            if(!File.Exists(SorceFile))
             {
-                MessageBox.Show("ソースファイルが選択されてません。もしくは無効です。" , "警告" , MessageBoxButtons.OK , MessageBoxIcon.Error);
+                MessageBox.Show("ソースファイルが選択されてません。もしくは見つかりません。" , "警告" , MessageBoxButtons.OK , MessageBoxIcon.Error);
+                return;
+            }
+
+            if (!File.Exists(CompilerFile))
+            {
+                MessageBox.Show("コンパイラファイルが選択されてません。もしくは見つかりません。", "警告", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
